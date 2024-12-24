@@ -2,21 +2,30 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-# Leer los datos del archivo CSV
-car_data = pd.read_csv('vehicles_us.csv')
+# Título de la aplicación
+st.title('Análisis de Datos de Vehículos')
 
-# Crear el encabezado de la aplicación
-st.header('Análisis de Vehículos Usados')
+# Cargar los datos
+@st.cache_data  # Usamos cache para evitar recargar los datos innecesariamente
+def load_data():
+    return pd.read_csv('vehicles_us.csv')
 
-# Crear un botón para generar un histograma
-hist_button = st.button('Construir histograma')
+car_data = load_data()
 
-if hist_button:  # Cuando se hace clic en el botón
-    # Mostrar un mensaje
-    st.write('Generando un histograma para la columna "odometer"')
+# Mostrar los primeros registros de los datos
+st.write(car_data.head())
 
-    # Crear un histograma usando plotly-express
-    fig = px.histogram(car_data, x="odometer", title="Histograma de Odometer")
-    
-    # Mostrar el histograma en Streamlit
-    st.plotly_chart(fig, use_container_width=True)
+# Botón para mostrar el histograma
+if st.button('Mostrar Histograma'):
+    # Crear un histograma
+    fig_histogram = px.histogram(car_data, x="odometer", title="Histograma de Odometer")
+    st.plotly_chart(fig_histogram)
+
+# Botón para mostrar el gráfico de dispersión
+if st.button('Mostrar Gráfico de Dispersión'):
+    # Crear un gráfico de dispersión
+    fig_scatter = px.scatter(car_data, x="odometer", y="price", title="Odometer vs Price")
+    st.plotly_chart(fig_scatter)
+
+
+
