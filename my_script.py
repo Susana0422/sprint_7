@@ -1,16 +1,16 @@
 import os
-print("Directorio actual:", os.getcwd())
 
+cpu_num = os.cpu_count()
+print(f"Mi computadora tiene {cpu_num} núcleos de CPU")
 import numpy as np
-print("Versión de numpy:", np.__version__)
-
 from matplotlib import pyplot as plt
-print("Matplotlib importado correctamente.")
-
 import sys
-print("Versión de Python:", sys.version)
-
+sys.version
 import pandas as pd
-print("Versión de pandas:", pd.__version__)
-!pip install plotly
-
+print(pd.__version__)
+from matplotlib import pyplot as plt
+print(plt.__version__)
+from matplotlib import pyplot as plt
+print(matplotlib.__version__)
+import matplotlib
+print(matplotlib.__version__)
